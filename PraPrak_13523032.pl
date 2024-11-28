@@ -344,3 +344,35 @@ rotate(List, N, Result) :-
     N1 is N mod Count,
     rotate_list(List, N1, Result).
 
+
+
+/* Soal 2.f */
+/* Deklarasi Fakta */
+getIndex(Grade, 'A') :- Grade >= 80, !. 
+getIndex(Grade, 'B') :- Grade >= 70, !.
+getIndex(Grade, 'C') :- Grade >= 60, !.
+getIndex(Grade, 'D') :- Grade >= 50, !.
+getIndex(Grade, 'E') :- Grade < 50, !.
+
+/* Deklarasi Rules */
+processIndexes([],[]) :- !.
+processIndexes([Head|Tail],Result) :-
+    processIndexes(Tail,Result1),
+    getIndex(Head,Index),
+    Result = [Index|Result1].
+
+getSum([],0) :- !.
+getSum([Head|Tail],Sum) :-
+    getSum(Tail,Sum1),
+    Sum is Sum1 + Head.
+
+checkStatus(Avg,Status) :-
+    Avg >= 80 -> Status = 'Pass'; Status = 'Fail'.
+
+prosesMahasiswa(Name, Grades, Result) :- 
+    count(Grades, N),
+    getSum(Grades, Sum),
+    Avg is Sum / N,
+    checkStatus(Avg,Status),
+    processIndexes(Grades, Indexes),
+    Result = [Name, Indexes, Avg, Status].

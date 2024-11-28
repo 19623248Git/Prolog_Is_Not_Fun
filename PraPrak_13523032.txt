@@ -107,7 +107,3 @@ Query: Seluruh keturunan qika yang memiliki tepat 2 keponakan
 
 no
 
-
-Bagian 2
-
-a
