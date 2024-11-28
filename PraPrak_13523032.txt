@@ -1,0 +1,113 @@
+Bagian 1
+
+Query: Suami dari aihoshino
+
+| ?- menikah(aihoshino,X).
+
+no
+| ?- menikah(X,aihoshino).
+
+no
+
+
+Query: Kakek buyut dan nenek buyut dari eve
+
+/% untuk mencari kakek dan nenek %/
+
+| ?- nenek(Nenek,eve), menikah(Nenek, Kakek).
+
+Kakek = barok
+Nenek = roxy ? ;
+
+/% untuk mencari kakek dan nenek buyut %/
+
+| ?- anak(eve,_Ortu), nenek(NenekBuyut,_Ortu), menikah(NenekBuyut, KakekBuyut).
+
+KakekBuyut = qika
+NenekBuyut = makio ? ;
+
+
+Query: Paman dari orang tua Francesco
+
+| ?- anak(francesco,Ortu), anak(Ortu,OrtuTua), saudara(OrtuTua,PamanOrtu), pria(PamanOrtu).
+
+no
+
+
+Query: Orang yang memiliki lebih dari satu istri
+
+| ?- menikah(Cowo,_Cewe1), menikah(Cowo,_Cewe2), _Cewe1\=_Cewe2.
+
+Cowo = qika ? 
+
+yes
+
+Query: Saudara tiri tertua dari shelby
+
+| ?- saudaratiri(SaudaraTiriTertua,shelby), usia(SaudaraTiriTertua,_UmurTertua), \+ (saudaratiri(X,shelby), usia(X,UsiaX), UsiaX>_UmurTertua).
+
+SaudaraTiriTertua = barok ? ;
+
+no
+
+
+Query: Orang tua yang memiliki tepat satu anak
+
+| ?- anak(_Anak1,X), \+ (anak(_Anak2, X) , _Anak1 \= _Anak2).
+
+X = makio ? ;
+
+X = roxy ? ;
+
+X = barok ? ;
+
+X = francesco ? ;
+
+X = suzy ? ;
+
+X = ruby ? ;
+
+X = eriq
+
+(31 ms) yes
+
+
+Query: Pria yang memiliki mertua berusia lebih dari 99 tahun
+
+| ?- pria(Pria), mertua(_Mertua, Pria), usia(_Mertua, _UsiaM), _UsiaM > 99.
+
+Pria = eriq ? ;
+
+no
+
+
+Query: Orang yatim piatu dengan usia termuda
+
+| ?- yatimpiatu(YatimTermuda), usia(YatimTermuda, _UYT), \+ (yatimpiatu(YBanding), usia(YBanding, UYB), UYB <_UYT).
+
+YatimTermuda = francesco ? ;
+
+no
+
+
+Query: Orang diatas 60 tahun yang statusnya menikah dengan orang yang memiliki saudara lebih dari 1 orang
+
+| ?- menikah(A,_B), usia(A,_UA), _UA > 60, saudara(_B,_B1), saudara(_B,_B2), _B1\=_B2.
+
+A = roxy ? ;
+
+A = roxy ? ;
+
+no
+
+
+Query: Seluruh keturunan qika yang memiliki tepat 2 keponakan
+
+| ?- keturunan(KeturunanQika,qika), keponakan(Keponakan1,KeturunanQika), keponakan(Keponakan2,KeturunanQika), Keponakan1 \= Keponakan2.
+
+no
+
+
+Bagian 2
+
+a
